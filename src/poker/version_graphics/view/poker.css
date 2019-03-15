@@ -15,6 +15,12 @@
     -fx-padding: 5.0px;
 }
 
+#winnerLabel {
+	-fx-font-family: sans-serif;
+	-fx-font-size: 20px;
+	-fx-text-fill: #74d624;
+}
+
 .deck {
 	-fx-font-family: Calibri;
 	-fx-font-size: 15px;

@@ -85,10 +85,11 @@ public class PlayerPane extends VBox {
 		return lblEvaluation;
 	}
 
-	public void updateWinLabel() {
+    //updates the winLabel and return its animation
+	public ParallelTransition updateWinLabel() {
     	int newWins = this.player.increaseWins();
     	lblWinCount.setText("Wins: "+newWins);
-    	this.bounce.play(); //show the animation
+    	return bounce;
     }
     
     public CardLabel getCardLabel(int i) {

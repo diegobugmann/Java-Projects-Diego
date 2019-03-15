@@ -1,5 +1,7 @@
 package poker.version_graphics.view;
 
+import javafx.animation.ParallelTransition;
+import javafx.animation.SequentialTransition;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -92,14 +94,17 @@ public class PokerGameView {
 	}
 
 	public void setWinner(Player winner) {
-		Label lblWinner = controls.lblWinner;
-		if (winner == null) lblWinner.setText("Winner: TIE");
-		else lblWinner.setText("Winner: "+winner.getPlayerName());
-		
+		SequentialTransition st = new SequentialTransition();
 		for (int i = 0; i < PokerGame.numPlayers; i++) {
 			if (winner == model.getPlayer(i))
-				this.getPlayerPane(i).updateWinLabel(); //updates the winLabel and shows an animation
+				st.getChildren().add(this.getPlayerPane(i).updateWinLabel()); //updates the winLabel and adds its animation
 		}
+		
+		Label lblWinner = controls.lblWinner;
+		if (winner == null) lblWinner.setText("Winner: TIE");
+		else lblWinner.setText("Winner: "+winner.getPlayerName()); //updates the winnerLabel
+		st.getChildren().add(controls.winnerTransition); //adds the animation
+		st.play(); //plays the animations in order
 	}
 
 }

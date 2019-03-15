@@ -37,6 +37,7 @@ public class PokerGameController {
     		view.getWinnerLabel().setText("Winner:");
     	}
     	model.getDeck().shuffle();
+    	view.getShuffleButton().setDisable(true); //disable shuffle button when shuffled
     }
     
     //Deal each player five cards, then evaluate the two hands, evaluate and show the winner
@@ -60,6 +61,7 @@ public class PokerGameController {
         			}));
         		}
         		}
+        	view.getShuffleButton().setDisable(false); //enable shuffle button when cards are dealt
    
     	} else {
             Alert alert = new Alert(AlertType.ERROR, "Not enough cards - shuffle first");

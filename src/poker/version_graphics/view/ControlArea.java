@@ -1,22 +1,29 @@
 package poker.version_graphics.view;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.ParallelTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.Timeline;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import poker.version_graphics.model.DeckOfCards;
 
 public class ControlArea extends HBox {
     private DeckLabel lblDeck = new DeckLabel();
-    Label lblWinner = new Label("Winner: ");
+    public Label lblWinner = new Label("Winner: ");
+    public FadeTransition winnerTransition;
     private Region spacer = new Region();
     private Region spacer2 = new Region();
-    Button btnShuffle = new Button("Shuffle");
-    Button btnDeal = new Button("Deal");
+    public Button btnShuffle = new Button("Shuffle");
+    public Button btnDeal = new Button("Deal");
     public static CardLabel deck = new CardLabel();
     private ProgressBar deckStatus = new ProgressBar();
 
@@ -34,7 +41,24 @@ public class ControlArea extends HBox {
 
         HBox.setHgrow(spacer, Priority.ALWAYS); // Use region to absorb resizing
         this.setId("controlArea"); // Unique ID in the CSS
-    }
+        this.lblWinner.setId("winnerLabel");
+        
+        //add animation for winnerLabel
+        winnerTransition = new FadeTransition(Duration.millis(500),lblWinner);
+        winnerTransition.setFromValue(1.0);
+        winnerTransition.setToValue(0.4);
+        winnerTransition.setAutoReverse(true);
+        winnerTransition.setCycleCount(8);
+        
+        //ScaleTransition st = new ScaleTransition(Duration.millis(500), lblWinner); 
+        //st.setDelay(Duration.millis(500));
+        //st.setToX(1.4);
+        //st.setToY(1.4);
+        //st.setAutoReverse(true);
+        //st.setCycleCount(4);
+        
+        //winnerTransition = new ParallelTransition(ft, st);
+        }
     
     public void linkDeck(DeckOfCards deck) {
     	lblDeck.setDeck(deck, deckStatus);
