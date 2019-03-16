@@ -1,13 +1,17 @@
 package poker.version_graphics.view;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
 import javafx.animation.ParallelTransition;
 import javafx.animation.PathTransition;
 import javafx.animation.RotateTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.SequentialTransition;
+import javafx.animation.Timeline;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import poker.version_graphics.model.Card;
 import poker.version_graphics.model.HandType;
@@ -19,6 +23,7 @@ public class PlayerPane extends VBox {
     private Label lblEvaluation = new Label("--");
     private Label lblWinCount = new Label("Wins: 0");
     private ParallelTransition bounce;
+    private Timeline timeline;
     
     // Link to player object
     private Player player;
@@ -35,8 +40,6 @@ public class PlayerPane extends VBox {
         for (int i = 0; i < 5; i++) {
             Label lblCard = new CardLabel();
             hboxCards.getChildren().add(lblCard);
-            //TODO cardlabels erst denn hinzuefüege wenn de spieler au würkli charte het, und bim shuffle 
-            //wieder entferne z.B.
         }
         hboxCards.setSpacing(5);
         
@@ -51,6 +54,13 @@ public class PlayerPane extends VBox {
         rotate.setByAngle(360);
         bounce = new ParallelTransition(scale, rotate);
         bounce.setNode(lblWinCount);
+        
+        timeline = new Timeline(
+                new KeyFrame(Duration.seconds(0), new KeyValue(lblWinCount.textFillProperty(), Color.WHITE)),
+                new KeyFrame(Duration.seconds(1), new KeyValue(lblWinCount.textFillProperty(), Color.RED))
+        );
+        timeline.setAutoReverse(true);
+        timeline.setCycleCount(2);
     }
     
     public void setPlayer(Player player) {
@@ -94,5 +104,11 @@ public class PlayerPane extends VBox {
     
     public CardLabel getCardLabel(int i) {
     	return (CardLabel) hboxCards.getChildren().get(i);
+    }
+    
+    public void resetWins() {
+    	this.lblWinCount.setText("Wins: 0");
+    	this.player.resetWins();
+    	timeline.play();
     }
 }

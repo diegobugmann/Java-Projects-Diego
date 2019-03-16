@@ -19,7 +19,7 @@ public class CardLabel extends Label {
 	
 	public CardLabel() {
 		super();
-		this.getStyleClass().add("card");
+		this.getStyleClass().add("card2");
 	}
 
 	public void setCard(Card card) {
@@ -31,8 +31,18 @@ public class CardLabel extends Label {
 			imv.fitHeightProperty().bind(this.heightProperty());
 			imv.setPreserveRatio(true);
 			this.imv = imv; //set as instance to prepare the animation later
-			this.setGraphic(null);
+			//prepare the back image
+			Image image2 = new Image(this.getClass().getClassLoader().getResourceAsStream("poker/images/back rounded.png"));
+			ImageView imv2 = new ImageView(image2);
+			imv2.fitWidthProperty().bind(this.widthProperty());
+			imv2.fitHeightProperty().bind(this.heightProperty());
+			imv2.setPreserveRatio(true);
+			this.setGraphic(imv2);
+			this.getStyleClass().clear();
+			this.getStyleClass().add("card"); //update the css file (make cardLabel visible)
 		} else {
+			this.getStyleClass().clear();
+			this.getStyleClass().add("card2"); //make cardLabel invisible
 			this.setGraphic(null);
 		}
 	}
@@ -48,8 +58,8 @@ public class CardLabel extends Label {
 		Bounds sceneCoord = this.localToScene(this.getBoundsInLocal()); //gets the coordinates in the scene
         int xCoordinates = (int) ((sceneCoord.getMinX() + sceneCoord.getMaxX())/2);
         int yCoordinates = (int) ((sceneCoord.getMinY() + sceneCoord.getMaxY())/2);
-        PathElement p1 = new MoveTo(552 - xCoordinates, 695 - yCoordinates); //sets the start to where the deck is
-        PathElement p2 = new LineTo(47, 68); //sets the end to where the card should be
+        PathElement p1 = new MoveTo(477 - xCoordinates, 630 - yCoordinates); //sets the start to where the deck is
+        PathElement p2 = new LineTo(40, 55); //sets the end to where the card should be
 		Path path = new Path();
 		path.getElements().add(p1);
 		path.getElements().add(p2);

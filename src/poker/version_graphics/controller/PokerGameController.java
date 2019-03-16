@@ -24,7 +24,10 @@ public class PokerGameController {
 			view.updatePlayerPane(); //updates the view AND the model (look at the method)
 			shuffle(); //shuffle the cards
 			});
-		
+		view.getResetButton().setOnAction( e -> {
+			for (int i = 0; i < PokerGame.numPlayers; i++)
+				view.getPlayerPane(i).resetWins();
+				});
 	}
 
     //Remove all cards from players hands, and shuffle the deck
@@ -42,6 +45,8 @@ public class PokerGameController {
     
     //Deal each player five cards, then evaluate the two hands, evaluate and show the winner
     private void deal() {
+    	view.getDealButton().setDisable(true); //prevent dealing again while hand is running
+    	view.getShuffleButton().setDisable(true); //prevent shuffling while hand is running
     	int cardsRequired = PokerGame.numPlayers * Player.HAND_SIZE;
     	DeckOfCards deck = model.getDeck();
     	if (cardsRequired <= deck.getCardsRemaining()) {
@@ -58,15 +63,15 @@ public class PokerGameController {
         			animateCards.setOnFinished(( e -> {
         				pp.getLblEvaluation().setText(hand); //display the handType for the last Player (NEEDED)
         				view.setWinner(winner); //set the winner at the end of the last animation
+        				view.getDealButton().setDisable(false); //enable Buttons at the end of the animations
+        				view.getShuffleButton().setDisable(false);
         			}));
         		}
         		}
-        	view.getShuffleButton().setDisable(false); //enable shuffle button when cards are dealt
    
     	} else {
             Alert alert = new Alert(AlertType.ERROR, "Not enough cards - shuffle first");
             alert.showAndWait();
     	}
     }
-    
 }

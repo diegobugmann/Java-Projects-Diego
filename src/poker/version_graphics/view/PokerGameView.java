@@ -39,7 +39,7 @@ public class PokerGameView {
 		
 		// Put players and controls into a BorderPane
 		BorderPane root = new BorderPane();
-		root.setPrefHeight(690);
+		root.setPrefHeight(625);
 		root.setTop(menu);
 		root.setCenter(players);
 		root.setBottom(controls);
@@ -71,6 +71,10 @@ public class PokerGameView {
 	
 	public PlayerPane getPlayerPane(int i) {
 		return (PlayerPane) players.getChildren().get(i);
+	}
+	
+	public Button getResetButton() {
+		return this.menu.resetWinsBtn;
 	}
 	
 	public Button getShuffleButton() {

@@ -45,7 +45,11 @@ public class Player implements Comparable<Player> {
     	winCount++;
     	return this.winCount;
     }
-
+    
+    public void resetWins() {
+    	this.winCount = 0;
+    }
+    
     /**
      * If the hand has not been evaluated, but does have all cards, then evaluate it.
      */

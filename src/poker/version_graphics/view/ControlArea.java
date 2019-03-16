@@ -9,6 +9,8 @@ import javafx.animation.Timeline;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -30,10 +32,16 @@ public class ControlArea extends HBox {
     public ControlArea() {
     	super(); // Always call super-constructor first !!
     	
-    	deck.setGraphic(null);
+    	Image image = new Image(this.getClass().getClassLoader().getResourceAsStream("poker/images/back rounded.png"));
+		ImageView imv = new ImageView(image);
+		imv.fitWidthProperty().bind(this.widthProperty());
+		imv.fitHeightProperty().bind(this.heightProperty());
+		imv.setPreserveRatio(true);
     	
-    	spacer.setMaxWidth(222);
-    	spacer2.setMinWidth(200);
+    	deck.setGraphic(imv);
+    	
+    	spacer.setMaxWidth(160);
+    	spacer2.setMinWidth(150);
     	deckStatus.setProgress(1); //set the bar to full when starting the program
     	
     	this.getChildren().addAll(spacer, deckStatus, lblDeck, btnShuffle, deck, btnDeal, 
@@ -48,17 +56,8 @@ public class ControlArea extends HBox {
         winnerTransition.setFromValue(1.0);
         winnerTransition.setToValue(0.4);
         winnerTransition.setAutoReverse(true);
-        winnerTransition.setCycleCount(8);
-        
-        //ScaleTransition st = new ScaleTransition(Duration.millis(500), lblWinner); 
-        //st.setDelay(Duration.millis(500));
-        //st.setToX(1.4);
-        //st.setToY(1.4);
-        //st.setAutoReverse(true);
-        //st.setCycleCount(4);
-        
-        //winnerTransition = new ParallelTransition(ft, st);
-        }
+        winnerTransition.setCycleCount(4);
+    }
     
     public void linkDeck(DeckOfCards deck) {
     	lblDeck.setDeck(deck, deckStatus);

@@ -6,13 +6,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 
 public class MenuPane extends HBox {
 	
 	private Label numLabel;
 	private RadioButton two, three, four;
-	public Button submitButton;
+	public Button submitButton, resetWinsBtn;
 	
 	public MenuPane() {
 		
@@ -27,8 +28,11 @@ public class MenuPane extends HBox {
 		three.setToggleGroup(tg);
 		four.setToggleGroup(tg);
 		submitButton = new Button("Submit");
+		Region spacer = new Region();
+		spacer.setMinWidth(90);
+		resetWinsBtn = new Button("Reset wins");
 		
-		this.getChildren().addAll(numLabel, two, three, four, submitButton);
+		this.getChildren().addAll(numLabel, two, three, four, submitButton, spacer, resetWinsBtn);
 		
 		this.setSpacing(10);
 		this.setPrefHeight(35);
