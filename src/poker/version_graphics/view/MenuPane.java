@@ -1,13 +1,11 @@
 package poker.version_graphics.view;
 
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.text.Text;
 
 public class MenuPane extends HBox {
 	
@@ -17,7 +15,7 @@ public class MenuPane extends HBox {
 	
 	public MenuPane() {
 		
-		Label numLabel = new Label("Number of players:");
+		numLabel = new Label("Number of players:");
 		
 		two = new RadioButton("2");
 		three = new RadioButton("3");

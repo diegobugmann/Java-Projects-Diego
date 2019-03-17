@@ -1,6 +1,5 @@
 package poker.version_graphics.view;
 
-import javafx.animation.ParallelTransition;
 import javafx.animation.SequentialTransition;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

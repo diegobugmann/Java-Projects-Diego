@@ -55,9 +55,14 @@ public class PlayerPane extends VBox {
         bounce = new ParallelTransition(scale, rotate);
         bounce.setNode(lblWinCount);
         
+        KeyValue kv = new KeyValue(lblWinCount.textFillProperty(), Color.WHITE);
+        KeyValue kv2 = new KeyValue(lblWinCount.textFillProperty(), Color.RED);
+        KeyValue kv3 = new KeyValue(lblWinCount.scaleXProperty(), 0.01);
+        KeyValue kv4 = new KeyValue(lblWinCount.scaleXProperty(), 1);
         timeline = new Timeline(
-                new KeyFrame(Duration.seconds(0), new KeyValue(lblWinCount.textFillProperty(), Color.WHITE)),
-                new KeyFrame(Duration.seconds(1), new KeyValue(lblWinCount.textFillProperty(), Color.RED))
+                new KeyFrame(Duration.seconds(0), kv),
+                new KeyFrame(Duration.seconds(0.5), kv3),
+                new KeyFrame(Duration.seconds(1), kv2, kv4)
         );
         timeline.setAutoReverse(true);
         timeline.setCycleCount(2);

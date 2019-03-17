@@ -41,15 +41,16 @@ public class PokerGameController {
     	}
     	model.getDeck().shuffle();
     	view.getShuffleButton().setDisable(true); //disable shuffle button when shuffled
+    	view.getDealButton().setDisable(false); //make sure the deal button is enabled after shuffling
     }
     
     //Deal each player five cards, then evaluate the two hands, evaluate and show the winner
     private void deal() {
-    	view.getDealButton().setDisable(true); //prevent dealing again while hand is running
-    	view.getShuffleButton().setDisable(true); //prevent shuffling while hand is running
     	int cardsRequired = PokerGame.numPlayers * Player.HAND_SIZE;
     	DeckOfCards deck = model.getDeck();
     	if (cardsRequired <= deck.getCardsRemaining()) {
+        	view.getDealButton().setDisable(true); //prevent dealing while hand is running
+        	view.getShuffleButton().setDisable(true); //prevent shuffling while hand is running
         	for (int i = 0; i < PokerGame.numPlayers; i++) {
         		Player p = model.getPlayer(i);
         		p.discardHand();
@@ -72,6 +73,7 @@ public class PokerGameController {
     	} else {
             Alert alert = new Alert(AlertType.ERROR, "Not enough cards - shuffle first");
             alert.showAndWait();
+            view.getDealButton().setDisable(true); // when error is shown, disable deal button
     	}
     }
 }
