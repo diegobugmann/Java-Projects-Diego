@@ -8,6 +8,7 @@
 
 .radio-button {
 	-fx-text-fill: white;
+
 }
 
 #controlArea {
@@ -18,7 +19,7 @@
 #winnerLabel {
 	-fx-font-family: sans-serif;
 	-fx-font-size: 18px;
-	-fx-text-fill: #74d624;
+	-fx-text-fill: #24af1f;
 }
 
 .deck {
@@ -42,15 +43,14 @@
 
 .card {
 	-fx-font-size: 18px;
-	-fx-padding: 2.0px;
     -fx-border-color: black;
     -fx-border-width: 0.5px;
 	-fx-background-color: white;
     -fx-min-width: 50;
-    -fx-pref-width: 79;
+    -fx-pref-width: 80;
     -fx-max-width: 500;
     -fx-min-height: 80;
-    -fx-pref-height: 112;
+    -fx-pref-height: 115;
     -fx-max-height: 800;
     -fx-background-radius: 5;
     -fx-border-radius: 5;
@@ -58,13 +58,18 @@
 
 .card2 {
 	-fx-font-size: 18px;
-	-fx-padding: 2.0px;
+	
+	/*
+	 * -fx-border-color: black;
+     * -fx-border-width: 0.5px;
+	 */
+	 
 	-fx-background-image: url("../../images/Empty.png");
     -fx-min-width: 50;
-    -fx-pref-width: 79;
+    -fx-pref-width: 80;
     -fx-max-width: 500;
     -fx-min-height: 80;
-    -fx-pref-height: 112;
+    -fx-pref-height: 115;
     -fx-max-height: 800;
     -fx-background-radius: 5;
     -fx-border-radius: 5;
@@ -78,4 +83,28 @@
 .root {
 	-fx-background-image: url("../../images/pokertable8.jpg");
 	-fx-background-size: cover;
+}
+
+.button {
+    -fx-border-color: #727272;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-background-radius: 6;
+    -fx-background-color: black;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 8.5pt;
+    -fx-text-fill: white;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.button:hover {
+    -fx-background-color: #3a3a3a;
+}
+
+.button:pressed {
+  -fx-background-color: #515151;
+}
+
+.progress-bar {
+	-fx-accent: #24af1f;
 }

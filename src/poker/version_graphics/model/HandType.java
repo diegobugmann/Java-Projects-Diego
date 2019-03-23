@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public enum HandType {
-    HighCard, OnePair, TwoPair, ThreeOfAKind, Straight, Flush, FullHouse, FourOfAKind, StraightFlush;
+    HighCard, OnePair, TwoPair, ThreeOfAKind, Straight, Flush, FullHouse, FourOfAKind, StraightFlush, RoyalFlush;
     
     /**
      * Determine the value of this hand. Note that this does not
@@ -22,6 +22,7 @@ public enum HandType {
         if (isFullHouse(cards)) currentEval = FullHouse;
         if (isFourOfAKind(cards)) currentEval = FourOfAKind;
         if (isStraightFlush(cards)) currentEval = StraightFlush;
+        if (isRoyalFlush(cards)) currentEval = RoyalFlush;
         
         return currentEval;
     }
@@ -69,38 +70,18 @@ public enum HandType {
     }
     
     public static boolean isStraight(ArrayList<Card> cards) {
-    	//ArrayList<Card> cCards = (ArrayList<Card>) cards.clone();
-    	//Collections.sort(cCards);
-    	//for (int i = 1; i < cCards.size(); i++) {
-    		//if (cCards.get(0).getRank().ordinal() != cCards.get(i).getRank().ordinal()-i)
-    			//return false;
-    	//}
-    	//return true;
-    	
-    	int minOrdinal = 12; //12 because it is the highest possible ordinal
-    	for (Card c : cards)
-    		minOrdinal = Math.min(c.getRank().ordinal(), minOrdinal); //sets the smallest ordinal
-    	
-    	//checks out whether the smallest ordinal has 4 following ones to make it a straight
-    	for (Card a : cards) {
-    		if (a.getRank().ordinal() == minOrdinal+1) {
-    			for (Card b : cards) {
-    				if (b.getRank().ordinal() == minOrdinal+2) {
-    					for (Card c : cards) {
-    						if (c.getRank().ordinal() == minOrdinal+3) {
-    							for (Card d : cards) {
-    								if (d.getRank().ordinal() == minOrdinal+4)
-    									return true;
-    								else if (minOrdinal == 0 && d.getRank().ordinal() == 12)
-    									return true; //makes sure A2345 is also considered a straight
-    							}
-    						}
-    					}
-    				}
+    	ArrayList<Card> cCards = (ArrayList<Card>) cards.clone();
+    	Collections.sort(cCards); //sorting the cards considering the ordinal (ascending)
+    	for (int i = 1; i < cCards.size(); i++) {
+    		if (cCards.get(0).getRank().ordinal() != cCards.get(i).getRank().ordinal()-i) {
+    			if (i == cCards.size()-1) { //true for the last card, to take A2345 into account
+    				if (cCards.get(0).getRank().ordinal() == 0 && cCards.get(cCards.size()-1).getRank().ordinal() == 12)
+    					return true; //makes sure A2345 is also considered a straight
     			}
+    			return false; //returns false as soon as the ordinals are not following (except for the A2345 case)
     		}
     	}
-    	return false;
+    	return true;
     }
     
     public static boolean isFlush(ArrayList<Card> cards) {
@@ -143,4 +124,13 @@ public enum HandType {
         	return true;
         return false;
     }
+    
+    public static boolean isRoyalFlush(ArrayList<Card> cards) {
+    	ArrayList<Card> cCards = (ArrayList<Card>) cards.clone();
+    	Collections.sort(cCards);
+        if (isStraightFlush(cards) && cCards.get(3).getRank().ordinal() == 11)
+        	return true;
+        return false;
+    }
+    
 }

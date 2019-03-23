@@ -60,7 +60,7 @@ public class PokerGameView {
 		int newPlayerNum = menu.getSelectedButton();
 		PokerGame.setPlayerNum(newPlayerNum);
 		model.updatePlayerModel(newPlayerNum);
-		for (int i = 0; i < PokerGame.numPlayers; i++) { //add the amount of Players wanted
+		for (int i = 0; i < newPlayerNum; i++) { //add the amount of Players wanted
 			PlayerPane pp = new PlayerPane();
 			pp.setPlayer(model.getPlayer(i)); //link to player object in the logic
 			if (i <= 1) players.add(pp, i, 0);

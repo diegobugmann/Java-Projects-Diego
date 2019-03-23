@@ -61,8 +61,8 @@ public class PlayerPane extends VBox {
         KeyValue kv4 = new KeyValue(lblWinCount.scaleXProperty(), 1);
         timeline = new Timeline(
                 new KeyFrame(Duration.seconds(0), kv),
-                new KeyFrame(Duration.seconds(0.5), kv3),
-                new KeyFrame(Duration.seconds(1), kv2, kv4)
+                new KeyFrame(Duration.seconds(0.7), kv3),
+                new KeyFrame(Duration.seconds(1.4), kv2, kv4)
         );
         timeline.setAutoReverse(true);
         timeline.setCycleCount(2);
@@ -81,7 +81,7 @@ public class PlayerPane extends VBox {
     		if (player.getCards().size() > i) //only true for deal(), not for shuffle()
     			card = player.getCards().get(i);
     		cl.setCard(card);
-    		if (card != null) {
+    		if (card != null) { //only true for deal()
     			PathTransition move = cl.prepareAnimation(); //prepare the animation for each card
     			cardAnimations.getChildren().add(move);
     		}

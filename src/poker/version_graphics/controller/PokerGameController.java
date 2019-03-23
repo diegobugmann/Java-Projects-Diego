@@ -64,8 +64,8 @@ public class PokerGameController {
         			animateCards.setOnFinished(( e -> {
         				pp.getLblEvaluation().setText(hand); //display the handType for the last Player (NEEDED)
         				view.setWinner(winner); //set the winner at the end of the last animation
-        				view.getDealButton().setDisable(false); //enable Buttons at the end of the animations
-        				view.getShuffleButton().setDisable(false);
+        				view.getDealButton().setDisable(false); //enable deal button at the end of the hand
+        				view.getShuffleButton().setDisable(false); //enable shuffle button at the end of the hand
         			}));
         		}
         		}

@@ -26,13 +26,15 @@ public class ControlArea extends HBox {
     public ControlArea() {
     	super(); // Always call super-constructor first !!
     	
+    	//prepare back image for deck
     	Image image = new Image(this.getClass().getClassLoader().getResourceAsStream("poker/images/back rounded.png"));
 		ImageView imv = new ImageView(image);
-		imv.fitWidthProperty().bind(this.widthProperty());
-		imv.fitHeightProperty().bind(this.heightProperty());
+		imv.fitWidthProperty().bind(deck.widthProperty());
+		imv.fitHeightProperty().bind(deck.heightProperty());
 		imv.setPreserveRatio(true);
-    	
+    	//set image
     	deck.setGraphic(imv);
+    	deck.getStyleClass().add("card");
     	
     	spacer.setMaxWidth(160);
     	spacer2.setMinWidth(150);
@@ -48,7 +50,7 @@ public class ControlArea extends HBox {
         //add animation for winnerLabel
         winnerTransition = new FadeTransition(Duration.millis(500),lblWinner);
         winnerTransition.setFromValue(1.0);
-        winnerTransition.setToValue(0.4);
+        winnerTransition.setToValue(0.25);
         winnerTransition.setAutoReverse(true);
         winnerTransition.setCycleCount(4);
     }

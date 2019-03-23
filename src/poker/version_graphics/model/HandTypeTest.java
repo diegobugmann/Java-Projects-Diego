@@ -36,7 +36,8 @@ public class HandTypeTest {
 	
 	private static String[][] straightFlushes = {
 			{ "AC", "JC", "TC", "QC", "KC" },
-			{ "TS", "JS", "8S", "7S", "9S" }
+			{ "TS", "JS", "8S", "7S", "9S" },
+			{ "AS", "3S", "2S", "5C", "4S" }
 			};
 	
 	// This is where we store the translated hands

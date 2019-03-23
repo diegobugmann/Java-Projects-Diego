@@ -68,28 +68,30 @@ public class Player implements Comparable<Player> {
         return handType.compareTo(o.handType);
     }
     
+    //return the Player with the better cards or null if it's a tie
     public Player evaluateHighCard(Player otherPlayer) {
     	Player winner = this; //es wird zu Beginn davon augegangen, das der aufrufende Player gewinnt
     	ArrayList<Card> cCards = (ArrayList<Card>) this.cards.clone();
 		ArrayList<Card> cCards2 = (ArrayList<Card>) otherPlayer.cards.clone();
     	Collections.sort(cCards);
     	Collections.sort(cCards2);
-			for (int r = cCards.size()-1; r >= 0; r--) {
-				if (cCards.get(r).compareTo(cCards2.get(r)) == 0) {
-					cCards.remove(r); //remove the highest card if it is the same
-					cCards2.remove(r);
-				}
-			}
-			if (cCards.size() > 0) { //if cards are left, compare the highest one
-				if (cCards.get(cCards.size()-1).compareTo(cCards2.get(cCards2.size()-1)) < 0)
-					winner = otherPlayer;
-			}
-			if (cCards.size() == 0) //if all cards got removed, it is a tie
-				winner = null;
+    	for (int r = cCards.size()-1; r >= 0; r--) {
+    		if (cCards.get(r).compareTo(cCards2.get(r)) == 0) {
+    			cCards.remove(r); //remove the highest card if it is the same
+    			cCards2.remove(r);
+    			}
+    		}
+    	if (cCards.size() > 0) { //if cards are left, compare the highest one
+    		if (cCards.get(cCards.size()-1).compareTo(cCards2.get(cCards2.size()-1)) < 0)
+    			winner = otherPlayer;
+    		}
+    	if (cCards.size() == 0) //if all cards got removed, it is a tie
+    		winner = null;
 			
-			return winner;
+    	return winner;
     }
     
+    //return the Player with the better pair(s) or null if it's a tie
     public Player evaluateHighPair(Player otherPlayer) {
     	Player winner = this; //es wird zu Beginn davon augegangen, das der aufrufende Player gewinnt
     	ArrayList<Card> cCards = (ArrayList<Card>) this.cards.clone();
@@ -134,6 +136,7 @@ public class Player implements Comparable<Player> {
     	return winner;
     }
     
+    //return the Player with higher triples
     public Player evaluateHighTrips(Player otherPlayer) {
     	Player winner = this; //es wird zu Beginn davon augegangen, das der aufrufende Player gewinnt
     	ArrayList<Card> cCards = (ArrayList<Card>) this.cards.clone();
