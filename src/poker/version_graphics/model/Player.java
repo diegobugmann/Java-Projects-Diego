@@ -70,7 +70,7 @@ public class Player implements Comparable<Player> {
     
     //return the Player with the better cards or null if it's a tie
     public Player evaluateHighCard(Player otherPlayer) {
-    	Player winner = this; //es wird zu Beginn davon augegangen, das der aufrufende Player gewinnt
+    	Player winner = this; //assuming that the calling player will win
     	ArrayList<Card> cCards = (ArrayList<Card>) this.cards.clone();
 		ArrayList<Card> cCards2 = (ArrayList<Card>) otherPlayer.cards.clone();
     	Collections.sort(cCards);
@@ -93,7 +93,7 @@ public class Player implements Comparable<Player> {
     
     //return the Player with the better pair(s) or null if it's a tie
     public Player evaluateHighPair(Player otherPlayer) {
-    	Player winner = this; //es wird zu Beginn davon augegangen, das der aufrufende Player gewinnt
+    	Player winner = this; //assuming that the calling player will win
     	ArrayList<Card> cCards = (ArrayList<Card>) this.cards.clone();
 		ArrayList<Card> cCards2 = (ArrayList<Card>) otherPlayer.cards.clone();
     	Collections.sort(cCards);
@@ -102,7 +102,7 @@ public class Player implements Comparable<Player> {
     	
     	for (int i = 0; i < cCards.size()-1; i++) {
         	if (cCards.get(i).compareTo(cCards.get(i+1)) == 0)
-        		pairedCard = cCards.get(i);
+        		pairedCard = cCards.get(i); 
         }
     	for (int i = 0 ; i < cCards2.size()-1; i++) {
         	if (cCards2.get(i).compareTo(cCards2.get(i+1)) == 0)
@@ -113,10 +113,10 @@ public class Player implements Comparable<Player> {
         
         if (pairedCard.compareTo(pairedCard2) == 0) { //they have the same pair? possible!
         	
-        	if (winner.handType == HandType.OnePair) //if it's one pair, evaluate the highest card now
+        	if (winner.handType == HandType.OnePair) //if they only have one pair, evaluate the highest card now
         		winner = winner.evaluateHighCard(otherPlayer);
         	
-        	if (winner.handType == HandType.TwoPair) { //if it's two pairs, evaluate the lower pair
+        	if (winner.handType == HandType.TwoPair) { //if they have two pairs, compare the lower pair now
         		for (int i = cCards.size()-1; i > 0; i--) { //that's why we search the other way around now
             		if (cCards.get(i).compareTo(cCards.get(i-1)) == 0)
             			pairedCard = cCards.get(i);
@@ -125,20 +125,19 @@ public class Player implements Comparable<Player> {
             		if (cCards2.get(i).compareTo(cCards2.get(i-1)) == 0)
             			pairedCard2 = cCards2.get(i);	
         		}
-        		if (pairedCard.compareTo(pairedCard2) < 0) //if the otherPlayer has the higher pair, set him as winner
+        		if (pairedCard.compareTo(pairedCard2) < 0) //if the otherPlayer has the higher 2nd pair, set him as winner
                 	winner = otherPlayer;
         		
         		if (pairedCard.compareTo(pairedCard2) == 0) //they have the same pair again? possible!
         			winner = winner.evaluateHighCard(otherPlayer); //now we search the higher card which is left
         	}
         }
-
     	return winner;
     }
     
     //return the Player with higher triples
     public Player evaluateHighTrips(Player otherPlayer) {
-    	Player winner = this; //es wird zu Beginn davon augegangen, das der aufrufende Player gewinnt
+    	Player winner = this; //assuming that the calling player will win
     	ArrayList<Card> cCards = (ArrayList<Card>) this.cards.clone();
 		ArrayList<Card> cCards2 = (ArrayList<Card>) otherPlayer.cards.clone();
     	Collections.sort(cCards);

@@ -46,6 +46,7 @@ public class PokerGameController {
     
     //Deal each player five cards, then evaluate the two hands, evaluate and show the winner
     private void deal() {
+    	if (view.getCheckBox()) shuffle();  //shuffle if auto shuffle is enabled
     	int cardsRequired = PokerGame.numPlayers * Player.HAND_SIZE;
     	DeckOfCards deck = model.getDeck();
     	if (cardsRequired <= deck.getCardsRemaining()) {
@@ -53,15 +54,15 @@ public class PokerGameController {
         	view.getShuffleButton().setDisable(true); //prevent shuffling while hand is running
         	for (int i = 0; i < PokerGame.numPlayers; i++) {
         		Player p = model.getPlayer(i);
-        		p.discardHand();
+        		p.discardHand(); //clear the players current hand
         		for (int j = 0; j < Player.HAND_SIZE; j++)
         			p.addCard(deck.dealCard()); //deal 5 cards
         		PlayerPane pp = view.getPlayerPane(i);
-        		SequentialTransition animateCards = pp.updatePlayerDisplay(i);
+        		SequentialTransition updateAnimation = pp.updatePlayerDisplay(i);
         		if (i == PokerGame.numPlayers-1) { //true for the last player
         			String hand = p.evaluateHand().toString(); //evaluate hand (NEEDED)
         			Player winner = model.evaluateWinner(); //evaluate the winner out of all Players
-        			animateCards.setOnFinished(( e -> {
+        			updateAnimation.setOnFinished(( e -> {
         				pp.getLblEvaluation().setText(hand); //display the handType for the last Player (NEEDED)
         				view.setWinner(winner); //set the winner at the end of the last animation
         				view.getDealButton().setDisable(false); //enable deal button at the end of the hand

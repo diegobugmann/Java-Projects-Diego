@@ -8,7 +8,10 @@
 
 .radio-button {
 	-fx-text-fill: white;
+}
 
+.check-box {
+	-fx-text-fill: white;
 }
 
 #controlArea {

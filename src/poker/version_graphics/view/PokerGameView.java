@@ -95,6 +95,10 @@ public class PokerGameView {
 	public int getSelectedButton() {
 		return menu.getSelectedButton();
 	}
+	
+	public boolean getCheckBox() {
+		return menu.autoShuffle.isSelected();
+	}
 
 	public void setWinner(Player winner) {
 		SequentialTransition st = new SequentialTransition();

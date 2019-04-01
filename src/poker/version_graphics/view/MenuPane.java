@@ -1,6 +1,7 @@
 package poker.version_graphics.view;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
@@ -12,6 +13,7 @@ public class MenuPane extends HBox {
 	private Label numLabel;
 	private RadioButton two, three, four;
 	public Button submitButton, resetWinsBtn;
+	public CheckBox autoShuffle;
 	
 	public MenuPane() {
 		
@@ -29,8 +31,11 @@ public class MenuPane extends HBox {
 		Region spacer = new Region();
 		spacer.setMinWidth(90);
 		resetWinsBtn = new Button("Reset wins");
+		Region spacer2 = new Region();
+		spacer2.setMinWidth(150);
+		autoShuffle = new CheckBox("Shuffle before every hand");
 		
-		this.getChildren().addAll(numLabel, two, three, four, submitButton, spacer, resetWinsBtn);
+		this.getChildren().addAll(numLabel, two, three, four, submitButton, spacer, resetWinsBtn, spacer2, autoShuffle);
 		
 		this.setSpacing(10);
 		this.setPrefHeight(35);
