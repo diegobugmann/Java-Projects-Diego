@@ -37,7 +37,7 @@ public class CardLabel extends Label {
 			imv2.fitWidthProperty().bind(this.widthProperty());
 			imv2.fitHeightProperty().bind(this.heightProperty());
 			imv2.setPreserveRatio(true);
-			this.setGraphic(imv2);
+			this.setGraphic(imv2); //set the back image
 			this.getStyleClass().clear();
 			this.getStyleClass().add("card"); //update the css file (make cardLabel visible)
 		} else {

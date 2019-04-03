@@ -85,9 +85,41 @@ public class Player implements Comparable<Player> {
     		if (cCards.get(cCards.size()-1).compareTo(cCards2.get(cCards2.size()-1)) < 0)
     			winner = otherPlayer;
     		}
-    	if (cCards.size() == 0) //if all cards got removed, it is a tie
+    	else if (cCards.size() == 0) //if all cards got removed, it is a tie
     		winner = null;
 			
+    	return winner;
+    }
+    
+    //return the Player with the better straight or null if it's a tie (needed because of A2345)
+    public Player evaluateHighStraight (Player otherPlayer) {
+    	Player winner = this; //assuming that the calling player will win
+    	ArrayList<Card> cCards = (ArrayList<Card>) this.cards.clone();
+		ArrayList<Card> cCards2 = (ArrayList<Card>) otherPlayer.cards.clone();
+    	Collections.sort(cCards);
+    	Collections.sort(cCards2);
+    	boolean hasWheel1 = false; //boolean for calling Player: Has he got A2345?
+    	boolean hasWheel2 = false; //boolean for otherPlayer: Has he got A2345?
+    	
+    	//Does Player 1 have a wheel (A2345)?
+    	if (cCards.get(0).getRank().ordinal() == 0 && cCards.get(cCards.size()-1).getRank().ordinal() == 12)
+    		hasWheel1 = true;
+    	//Does Player 2 have a wheel (A2345)?
+    	if (cCards2.get(0).getRank().ordinal() == 0 && cCards2.get(cCards.size()-1).getRank().ordinal() == 12)
+    		hasWheel2 = true;
+    	
+    	//If no one has a wheel, compare the highest card
+    	if (!hasWheel1 && !hasWheel2)
+    		winner = winner.evaluateHighCard(otherPlayer);
+    	
+    	//If both have a wheel, it is a tie
+    	else if (hasWheel1 && hasWheel2)
+    		winner = null;
+    	
+    	//If only the calling player has a wheel, he certainly has the worse hand
+    	else if (hasWheel1 && !hasWheel2)
+    		winner = otherPlayer;
+    	
     	return winner;
     }
     
@@ -111,12 +143,12 @@ public class Player implements Comparable<Player> {
         if (pairedCard.compareTo(pairedCard2) < 0) //if the otherPlayer has the higher pair, set him as winner
         	winner = otherPlayer;
         
-        if (pairedCard.compareTo(pairedCard2) == 0) { //they have the same pair? possible!
+        else if (pairedCard.compareTo(pairedCard2) == 0) { //they have the same pair? possible!
         	
         	if (winner.handType == HandType.OnePair) //if they only have one pair, evaluate the highest card now
         		winner = winner.evaluateHighCard(otherPlayer);
         	
-        	if (winner.handType == HandType.TwoPair) { //if they have two pairs, compare the lower pair now
+        	else if (winner.handType == HandType.TwoPair) { //if they have two pairs, compare the lower pair now
         		for (int i = cCards.size()-1; i > 0; i--) { //that's why we search the other way around now
             		if (cCards.get(i).compareTo(cCards.get(i-1)) == 0)
             			pairedCard = cCards.get(i);
@@ -128,7 +160,7 @@ public class Player implements Comparable<Player> {
         		if (pairedCard.compareTo(pairedCard2) < 0) //if the otherPlayer has the higher 2nd pair, set him as winner
                 	winner = otherPlayer;
         		
-        		if (pairedCard.compareTo(pairedCard2) == 0) //they have the same pair again? possible!
+        		else if (pairedCard.compareTo(pairedCard2) == 0) //they have the same pair again? possible!
         			winner = winner.evaluateHighCard(otherPlayer); //now we search the higher card which is left
         	}
         }

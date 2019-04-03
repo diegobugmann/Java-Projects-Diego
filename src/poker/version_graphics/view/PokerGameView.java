@@ -58,8 +58,8 @@ public class PokerGameView {
 	public void updatePlayerPane() {
 		players.getChildren().clear(); //delete all PlayerPanes
 		int newPlayerNum = menu.getSelectedButton();
-		PokerGame.setPlayerNum(newPlayerNum);
-		model.updatePlayerModel(newPlayerNum);
+		PokerGame.setPlayerNum(newPlayerNum); //set new Player amount
+		model.updatePlayerModel();
 		for (int i = 0; i < newPlayerNum; i++) { //add the amount of Players wanted
 			PlayerPane pp = new PlayerPane();
 			pp.setPlayer(model.getPlayer(i)); //link to player object in the logic

@@ -21,7 +21,7 @@ public class PokerGameController {
 		view.getShuffleButton().setOnAction( e -> shuffle() );
 		view.getDealButton().setOnAction( e -> deal() );
 		view.getSubmitButton().setOnAction( e -> {
-			view.updatePlayerPane(); //updates the view AND the model (look at the method)
+			view.updatePlayerPane(); //updates the view AND the model
 			shuffle(); //shuffle the cards
 			});
 		view.getResetButton().setOnAction( e -> {

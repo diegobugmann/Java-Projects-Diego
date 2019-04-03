@@ -37,9 +37,11 @@ public class PokerGameModel {
 
        		else if (winner.compareTo(players.get(f)) == 0) { //search the winner if they have the same hand
        			
-       			if (winner.getHandType() == HandType.HighCard || winner.getHandType() == HandType.Flush ||
-       				winner.getHandType() == HandType.Straight || winner.getHandType() == HandType.StraightFlush)
+       			if (winner.getHandType() == HandType.HighCard || winner.getHandType() == HandType.Flush)
        				winner = winner.evaluateHighCard(players.get(f)); //evaluate the highest card
+       			
+       			else if (winner.getHandType() == HandType.Straight || winner.getHandType() == HandType.StraightFlush)
+       				winner = winner.evaluateHighStraight(players.get(f)); //evaluate the highest straight)
        			
        			else if (winner.getHandType() == HandType.OnePair || winner.getHandType() == HandType.TwoPair)
        				winner = winner.evaluateHighPair(players.get(f)); //evaluate the highest pair
@@ -70,9 +72,9 @@ public class PokerGameModel {
     		return null;
     }
 	
-	public void updatePlayerModel(int newPlayerNum) {
+	public void updatePlayerModel() {
 		players.clear(); //clear all players
-		for (int i = 0; i < newPlayerNum; i++) { //add new amount
+		for (int i = 0; i < PokerGame.numPlayers; i++) { //add new amount
 			players.add(new Player("Player " + (i+1)));
 		}
 	}

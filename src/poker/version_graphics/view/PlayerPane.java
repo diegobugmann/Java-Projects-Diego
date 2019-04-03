@@ -82,12 +82,12 @@ public class PlayerPane extends VBox {
     			card = player.getCards().get(i);
     		cl.setCard(card);
     		if (card != null) { //only true for deal()
-    			PathTransition move = cl.prepareAnimation(); //prepare the animation for each card
-    			cardAnimations.getChildren().add(move);
+    			PathTransition moveCard = cl.prepareAnimation(); //prepare the animation for each card
+    			cardAnimations.getChildren().add(moveCard);
     		}
     	}
-    	//play the Animation (MACHTS MOMENTAN AU BIM SHUFFLE, D TRANSITION ISCH EIFACH LEER)
-    	cardAnimations.setDelay(Duration.millis(p*250)); 
+    	//play the Animation (when shuffling, the animation is empty)
+    	cardAnimations.setDelay(Duration.millis(p*250));
     	cardAnimations.play();
     	HandType evaluation = player.evaluateHand(); //evaluate the hand
     	lblEvaluation.setText("--"); //always delete the old evaluation while the animation is playing
@@ -112,8 +112,8 @@ public class PlayerPane extends VBox {
     }
     
     public void resetWins() {
-    	this.lblWinCount.setText("Wins: 0");
     	this.player.resetWins();
+    	this.lblWinCount.setText("Wins: 0");
     	timeline.play();
     }
 }
