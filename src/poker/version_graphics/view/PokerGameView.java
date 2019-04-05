@@ -38,7 +38,7 @@ public class PokerGameView {
 		
 		// Put players and controls into a BorderPane
 		BorderPane root = new BorderPane();
-		root.setPrefHeight(625);
+		root.setPrefHeight(635);
 		root.setTop(menu);
 		root.setCenter(players);
 		root.setBottom(controls);
