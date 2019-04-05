@@ -58,7 +58,7 @@ public class CardLabel extends Label {
 		Bounds sceneCoord = this.localToScene(this.getBoundsInLocal()); //gets the coordinates in the scene
         int xCoordinates = (int) ((sceneCoord.getMinX() + sceneCoord.getMaxX())/2);
         int yCoordinates = (int) ((sceneCoord.getMinY() + sceneCoord.getMaxY())/2);
-        PathElement p1 = new MoveTo(478 - xCoordinates, 630 - yCoordinates); //sets the start to where the deck is
+        PathElement p1 = new MoveTo(478 - xCoordinates, 640 - yCoordinates); //sets the start to where the deck is
         PathElement p2 = new LineTo(40, 57); //sets the end to where the card should be
 		Path path = new Path();
 		path.getElements().add(p1);
