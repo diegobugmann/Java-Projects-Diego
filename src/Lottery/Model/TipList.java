@@ -14,5 +14,17 @@ public class TipList {
 	public void addTip(Combination tip) {
 		this.tips.add(tip);
 	}
+	
+	public void deleteTip(Combination tip) {
+		this.tips.remove(tip);
+	}
+	
+	public void clearTips() {
+		this.tips.clear();
+	}
+	
+	public ObservableList<Combination> getTips() {
+		return this.tips;
+	}
 
 }
