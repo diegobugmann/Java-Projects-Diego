@@ -11,18 +11,21 @@ public class LotteryView {
 	
 	private LotteryModel model;
 	private TipArea tipArea;
+	private DrawArea drawArea;
+	private EvaluateArea evaluateArea;
 	
 	public LotteryView(Stage stage, LotteryModel model) {
 		this.model = model;
 		
 		tipArea = new TipArea(model);
+		drawArea = new DrawArea(model);
+		evaluateArea = new EvaluateArea();
 		
 		HBox root = new HBox();
-		root.getChildren().addAll(tipArea);
+		root.setSpacing(10);
+		root.getChildren().addAll(tipArea, drawArea, evaluateArea);
 		
-		
-		
-		
+
 		stage.setResizable(true);
 		
         // Create and display scene
@@ -36,5 +39,13 @@ public class LotteryView {
 	
 	public TipArea getTipArea() {
 		return this.tipArea;
+	}
+	
+	public DrawArea getDrawArea() {
+		return this.drawArea;
+	}
+	
+	public EvaluateArea getEvaluateArea() {
+		return this.evaluateArea;
 	}
 }

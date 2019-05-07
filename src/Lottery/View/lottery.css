@@ -6,3 +6,52 @@
 	-fx-font-size: 16px;
 	-fx-text-fill: #000000;
 }
+
+#lastDrawLabel {
+	-fx-font-family: sans-serif;
+	-fx-font-style: oblique;
+	-fx-font-weight: bold;
+	-fx-font-size: 16px;
+	-fx-text-fill: #000000;
+}
+
+.table-view {
+	-fx-background-color: transparent;
+}
+
+.table-view:focused {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #86ccf9;
+}
+
+.table-view .column-header-background .label{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+.table-view .table-cell{
+    -fx-text-fill: black;
+    -fx-border-color: #e5e5e5;
+    -fx-border-width: 0.5;
+}
+
+.table-row-cell{
+    -fx-background-color: #f4faff;
+}
+
+.table-row-cell:odd{
+    -fx-background-color: #e8f5ff; 
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #6eafe5;
+    -fx-text-background-color: white;
+    -fx-background-radius: 1;
+}

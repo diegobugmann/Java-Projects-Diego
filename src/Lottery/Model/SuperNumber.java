@@ -4,12 +4,9 @@ import java.util.Random;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class SuperNumber {
+public class SuperNumber extends RegularNumber {
 	
 	private final static int MAX_VALUE = 6;
-	private SimpleStringProperty asString = new SimpleStringProperty();
-	private int value;
-	private Random rand = new Random();
 	
 	public SuperNumber(int value) {
 		if (value > 0 && value <= MAX_VALUE)
@@ -22,21 +19,6 @@ public class SuperNumber {
 		asString.setValue(value+"");
 	}
 	
-	//NEEDED?
-	public void setNumber(int value) {
-		if (value > 0 && value <= MAX_VALUE)
-			this.value = value;
-		asString.setValue(value+"");
-	}
-	
-	public SimpleStringProperty getValueProperty() {
-		return this.asString;
-	}
-	
-	public int getValue() {
-		return this.value;
-	}
-	
 	public static boolean isValid(String valueAsString) {
 		try {
 			int value = Integer.parseInt(valueAsString);
@@ -44,6 +26,10 @@ public class SuperNumber {
 		} catch (NumberFormatException e) {
 			return false;
 		}
+	}
+	
+	public boolean equals(SuperNumber otherNumber) {
+		return this.value == otherNumber.value;
 	}
 
 }

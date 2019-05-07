@@ -4,12 +4,12 @@ import java.util.Random;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class RegularNumber {
+public class RegularNumber implements Comparable<RegularNumber> {
 	
 	private final static int MAX_VALUE = 42;
-	private SimpleStringProperty asString = new SimpleStringProperty();
-	private int value;
-	private Random rand = new Random();
+	protected SimpleStringProperty asString = new SimpleStringProperty();
+	protected int value;
+	protected Random rand = new Random();
 	
 	public RegularNumber(int value) {
 		if (value > 0 && value <= MAX_VALUE)
@@ -22,7 +22,6 @@ public class RegularNumber {
 		asString.setValue(value+"");
 	}
 	
-	//NEEDED?
 	public void setNumber(int value) {
 		if (value > 0 && value <= MAX_VALUE)
 			this.value = value;
@@ -44,6 +43,15 @@ public class RegularNumber {
 		} catch (NumberFormatException e) {
 			return false;
 		}
+	}
+
+	@Override
+	public int compareTo(RegularNumber otherNumber) {
+		return this.value - otherNumber.value;
+	}
+	
+	public boolean equals(RegularNumber otherNumber) {
+		return this.value == otherNumber.value;
 	}
 
 }

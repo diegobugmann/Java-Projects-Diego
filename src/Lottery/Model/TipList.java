@@ -26,5 +26,30 @@ public class TipList {
 	public ObservableList<Combination> getTips() {
 		return this.tips;
 	}
+	
+	public double getValueInCHF() {
+		return tips.size()*2.5;
+	}
+	
+	public int getSize() {
+		return tips.size();
+	}
+	
+	public String displayWins() {
+		String winnings = "";
+		for (int i = 0; i < tips.size(); i++) {
+			if (tips.get(i).getCombinationType() != null)
+				winnings += "Tipp "+(i+1)+" -> "+tips.get(i).getCombinationType()+"\n";
+		}
+		return winnings;
+	}
+	
+	public int getWinSum() {
+		int totalWinnings = 0;
+		for (Combination c : tips)
+			if (c.getCombinationType() != null)
+				totalWinnings += c.getCombinationType().getWin();
+		return totalWinnings;
+	}
 
 }
