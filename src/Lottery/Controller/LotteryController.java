@@ -1,16 +1,17 @@
 package Lottery.Controller;
 
 import java.text.DecimalFormat;
+import java.util.Optional;
 
 import Lottery.Model.Combination;
 import Lottery.Model.LotteryModel;
 import Lottery.Model.RegularNumber;
 import Lottery.Model.SuperNumber;
 import Lottery.Model.TipEvaluation;
+import Lottery.View.Alerts;
 import Lottery.View.LotteryView;
 import javafx.collections.ListChangeListener;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 
 public class LotteryController {
 	
@@ -28,26 +29,18 @@ public class LotteryController {
 			Combination selectedTip = view.getTipArea().getTipTable().getSelectionModel().getSelectedItem();
 			model.getTipList().deleteTip(selectedTip);
 		});
-		view.getTipArea().clearBtn.setOnAction(e -> model.getTipList().clearTips());
-		view.getTipArea().hintsBtn.setOnAction(e -> {
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setHeaderText("Tipp-Hinweise");
-			alert.setContentText("Zahlen von 1-42\n"+
-					"Superzahl von 1-6\n"+
-					"Preis pro Tipp: 2.50CHF");
-			alert.showAndWait();
-		});
+		view.getTipArea().clearBtn.setOnAction(e -> {
+			if (model.getTipList().getTips().size() > 0) {
+				Optional<ButtonType> choice = Alerts.getClearAlert().showAndWait();
+				if (choice.get() == ButtonType.OK) model.getTipList().clearTips();
+			}});
+		createEditCellEvents(); //handle the editable cells
 		
-		//handle the editable cells
-		createEditCellEvents();
-		
-		/*
 		model.getTipList().getTips().addListener((ListChangeListener<Combination>) c -> {
 			while (c.next()) {
-				view.tips.scrollTo(c.getFrom());
+				view.getTipArea().getTipTable().scrollTo(c.getFrom());
 			}
 		});
-		*/
 		
 		//Add events to the DrawArea
 		view.getDrawArea().drawBtn.setOnAction(e -> draw());
@@ -56,13 +49,13 @@ public class LotteryController {
 			view.getDrawArea().getCurrentPriceLabel().setText("Aktuelle Kosten: "+(dm.format(currentPrice)));
 		})); //update the current costs whenever a Tip is added/deleted
 			
-		
-		//Add events to the EvaluateArea
-		view.getEvaluateArea().oddsBtn.setOnAction(e -> showAlert());
-		
+		//Add events to the Menu
+		view.getMenuPane().hints.setOnAction(e -> Alerts.getHintsAlert().showAndWait());
+		view.getMenuPane().odds.setOnAction(e -> Alerts.getOddsAlert().showAndWait());
+		view.getMenuPane().stats.setOnAction(e -> Alerts.getStatsAlert().showAndWait());
 	}
 
-	public void createEditCellEvents() {
+	private void createEditCellEvents() {
 				
 		view.getTipArea().getTipTable().getColNumOne().setOnEditCommit(e -> {
 			String newValue = e.getNewValue();
@@ -125,41 +118,18 @@ public class LotteryController {
 			else
 				e.getTableView().refresh();
 		});
-		
 	}
 	
-	public void draw() {
+	private void draw() {
 		if (!model.getTipList().getTips().isEmpty()) {
+			view.getDrawArea().drawBtn.setDisable(true); //disable draw Button while drawing
 			Combination drawing = model.drawNumbers(); //draw numbers
 			view.getDrawArea().displayNumbers(drawing); //and display them
 			TipEvaluation.evaluateTips(model.getTipList().getTips(), model.getDrawing()); //evaluate the tips
 			view.getDrawArea().updateLastDraw(); //show the details of the current draw
 			model.updateStatistics(); //update the overall-statistics
-			view.getEvaluateArea().updateStatistics(); //and display them
-		} else {
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setHeaderText("Keine Tipps eingegeben!");
-			alert.setContentText("Geben Sie Tipps ein, um eine Ziehung durchzuführen.");
-			alert.showAndWait();
-		}
+			view.getDrawArea().playAnimations(); //show the animations
+		} else
+			Alerts.getNoTipsAlert().showAndWait();
 	}
-	
-	private void showAlert() {
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Gewinne und Wahrscheinlichkeiten");
-		alert.setHeaderText("Gewinne und Wahrscheinlichkeiten");
-		alert.setContentText(
-				"Richtige Zahlen\t  Gewinn\t\t\t Wahrscheinlichkeit\n" + 
-				"\t 6+1\t\t	  Jackpot\t\t\t 1 : 31'474'716 \n" + 
-				"\t 6\t\t	  CHF 1'000'000.-\t 1 : 6.294.943 \n" + 
-				"\t 5+1\t\t	  CHF 10'000.-\t\t 1 : 145.716 \n" + 
-				"\t 5\t\t	  CHF 1'000.-\t\t 1 : 29.143 \n" + 
-				"\t 4+1\t\t	  CHF 150.-\t\t 1 : 3.331 \n" + 
-				"\t 4\t\t	  CHF 75.-\t\t\t 1 : 666 \n" + 
-				"\t 3+1\t\t	  CHF 25.-\t\t\t 1 : 220 \n" + 
-				"\t 3\t\t	  CHF 10.-\t\t\t 1 : 44"
-				);
-        alert.showAndWait();
-	}
-
 }

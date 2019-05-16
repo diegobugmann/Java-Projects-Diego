@@ -3,6 +3,7 @@ package Lottery.View;
 import Lottery.Model.Combination;
 import Lottery.Model.LotteryModel;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -19,8 +20,8 @@ public class TipTable extends TableView<Combination> {
 	private TableColumn<Combination, String> colSupNum;
 
 	public TipTable(LotteryModel model) {
-		
 		this.setEditable(true);
+		this.setPlaceholder(new Label("Herzlich Wilkommen beim Lotto-Simulator!"));
 		
 		colTipNum = new TableColumn<>("Nr.");
 		colTipNum.setSortable(false);
@@ -30,37 +31,37 @@ public class TipTable extends TableView<Combination> {
 		this.getColumns().add(colTipNum);
 
 		colNumOne = new TableColumn<>("1. Zahl");
-		colNumOne.setPrefWidth(70);
+		colNumOne.setPrefWidth(65);
 		colNumOne.setCellValueFactory(c -> c.getValue().getNumber(0).getValueProperty());
 		colNumOne.setCellFactory(TextFieldTableCell.forTableColumn());
 		this.getColumns().add(colNumOne);
 
 		colNumTwo = new TableColumn<>("2. Zahl");
-		colNumTwo.setPrefWidth(70);
+		colNumTwo.setPrefWidth(65);
 		colNumTwo.setCellValueFactory(c -> c.getValue().getNumber(1).getValueProperty());
 		colNumTwo.setCellFactory(TextFieldTableCell.forTableColumn());
 		this.getColumns().add(colNumTwo);
 
 		colNumThree = new TableColumn<>("3. Zahl");
-		colNumThree.setPrefWidth(70);
+		colNumThree.setPrefWidth(65);
 		colNumThree.setCellValueFactory(c -> c.getValue().getNumber(2).getValueProperty());
 		colNumThree.setCellFactory(TextFieldTableCell.forTableColumn());
 		this.getColumns().add(colNumThree);
 		
 		colNumFour = new TableColumn<>("4. Zahl");
-		colNumFour.setPrefWidth(70);
+		colNumFour.setPrefWidth(65);
 		colNumFour.setCellValueFactory(c -> c.getValue().getNumber(3).getValueProperty());
 		colNumFour.setCellFactory(TextFieldTableCell.forTableColumn());
 		this.getColumns().add(colNumFour);
 		
 		colNumFive = new TableColumn<>("5. Zahl");
-		colNumFive.setPrefWidth(70);
+		colNumFive.setPrefWidth(65);
 		colNumFive.setCellValueFactory(c -> c.getValue().getNumber(4).getValueProperty());
 		colNumFive.setCellFactory(TextFieldTableCell.forTableColumn());
 		this.getColumns().add(colNumFive);
 		
 		colNumSix = new TableColumn<>("6. Zahl");
-		colNumSix.setPrefWidth(70);
+		colNumSix.setPrefWidth(65);
 		colNumSix.setCellValueFactory(c -> c.getValue().getNumber(5).getValueProperty());
 		colNumSix.setCellFactory(TextFieldTableCell.forTableColumn());
 		this.getColumns().add(colNumSix);
@@ -71,7 +72,7 @@ public class TipTable extends TableView<Combination> {
 		colSupNum.setCellFactory(TextFieldTableCell.forTableColumn());
 		this.getColumns().add(colSupNum);
 		
-		this.setItems(model.getTipList().getTips());
+		this.setItems(model.getTipList().getTips()); //link to the model, to immediatly display changes
 	}
 	
 	public TableColumn<Combination, String> getColNumOne() {
@@ -101,5 +102,4 @@ public class TipTable extends TableView<Combination> {
 	public TableColumn<Combination, String> getColSupNum() {
 		return colSupNum;
 	}
-
 }

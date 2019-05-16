@@ -31,15 +31,11 @@ public class TipList {
 		return tips.size()*2.5;
 	}
 	
-	public int getSize() {
-		return tips.size();
-	}
-	
 	public String displayWins() {
 		String winnings = "";
 		for (int i = 0; i < tips.size(); i++) {
 			if (tips.get(i).getCombinationType() != null)
-				winnings += "Tipp "+(i+1)+" -> "+tips.get(i).getCombinationType()+"\n";
+				winnings += tips.get(i).getCombinationType()+" mit Tipp "+(i+1)+" gewonnen!\n";
 		}
 		return winnings;
 	}
@@ -51,5 +47,4 @@ public class TipList {
 				totalWinnings += c.getCombinationType().getWin();
 		return totalWinnings;
 	}
-
 }

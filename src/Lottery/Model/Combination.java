@@ -2,7 +2,6 @@ package Lottery.Model;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.stream.Collectors;
 
 public class Combination {
@@ -11,18 +10,12 @@ public class Combination {
 	private SuperNumber superNumber;
 	private CombinationType combinationType;
 	
-	public Combination(ArrayList<RegularNumber> numbers, SuperNumber superNumber) {
-		this.numbers = numbers;
-		this.superNumber = superNumber;
-		this.combinationType = null;
-	}
-	
 	//generate a random Combination of 6 Numbers and 1 SuperNumber
 	public Combination() {
 		for (int i = 0; i < 6; i++) {
 			numbers.add(new RegularNumber());
 			for (int j = 0; j < i; j++) { //make sure that every number is unique
-				while (numbers.get(j).getValue() == numbers.get(i).getValue()) {
+				while (numbers.get(j).equals(numbers.get(i))) {
 					numbers.remove(i);
 					numbers.add(new RegularNumber());
 				}
@@ -41,6 +34,7 @@ public class Combination {
 		return this.numbers;
 	}
 	
+	//needed to evaluate the tips
 	public ArrayList<Integer> getNumbersAsInt() {
 		return (ArrayList<Integer>) this.numbers.stream().map(c -> c.getValue()).collect(Collectors.toList());
 	}
@@ -68,5 +62,4 @@ public class Combination {
 	public void setCombinationType(CombinationType combinationType) {
 		this.combinationType = combinationType;
 	}
-	
 }

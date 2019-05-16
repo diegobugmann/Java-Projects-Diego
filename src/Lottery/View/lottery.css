@@ -7,13 +7,29 @@
 	-fx-text-fill: #000000;
 }
 
-#lastDrawLabel {
+#header {
 	-fx-font-family: sans-serif;
 	-fx-font-style: oblique;
 	-fx-font-weight: bold;
 	-fx-font-size: 16px;
 	-fx-text-fill: #000000;
 }
+
+.root {
+	
+}
+
+.tipArea {
+	-fx-padding: 6;
+}
+
+.drawArea {
+	-fx-padding: 6;
+}
+
+.menuArea {
+	
+} 
 
 .table-view {
 	-fx-background-color: transparent;

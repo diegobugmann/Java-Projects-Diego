@@ -10,7 +10,7 @@ public class TipEvaluation {
 	
 	public static void evaluateTips(ObservableList<Combination> tips, Combination drawing) {
 		for (Combination c : tips) {
-			c.setCombinationType(null); //Vor dem evaluieren den CombinationType resetten
+			c.setCombinationType(null); //reset CombinationTypes before evaluating again
 			ArrayList<Integer> regNumList = c.getNumbersAsInt();
 			regNumList.retainAll(drawing.getNumbersAsInt()); //remove all the not matching RegularNumbers from the list
 			
@@ -51,13 +51,8 @@ public class TipEvaluation {
 								c.setCombinationType(CombinationType.SixPlus);
 								counters[7]++;
 							}
-							break;
 				}
 			}
 		}
-		
-		//return a list with all the winning Combinations
-		//return winningTips;
 	}
-
 }

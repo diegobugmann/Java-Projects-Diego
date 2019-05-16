@@ -1,7 +1,5 @@
 package Lottery.Model;
 
-import java.util.ArrayList;
-
 public class LotteryModel {
 	
 	private TipList tipList;
@@ -22,7 +20,7 @@ public class LotteryModel {
 	}
 	
 	public void updateStatistics() {
-		tipCount += tipList.getSize();
+		tipCount += tipList.getTips().size();
 		totalCosts = tipCount*2.5;
 		totalWins += tipList.getWinSum();
 	}
@@ -34,5 +32,4 @@ public class LotteryModel {
 	public Combination getDrawing() {
 		return this.drawing;
 	}
-
 }

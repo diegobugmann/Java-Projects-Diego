@@ -11,12 +11,6 @@ public class RegularNumber implements Comparable<RegularNumber> {
 	protected int value;
 	protected Random rand = new Random();
 	
-	public RegularNumber(int value) {
-		if (value > 0 && value <= MAX_VALUE)
-			this.value = value;
-		asString.setValue(value+"");
-	}
-	
 	public RegularNumber() {
 		this.value = rand.nextInt(MAX_VALUE)+1;
 		asString.setValue(value+"");
@@ -53,5 +47,4 @@ public class RegularNumber implements Comparable<RegularNumber> {
 	public boolean equals(RegularNumber otherNumber) {
 		return this.value == otherNumber.value;
 	}
-
 }

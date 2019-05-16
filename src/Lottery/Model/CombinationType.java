@@ -19,7 +19,7 @@ public enum CombinationType {
 	}
 	
 	public String toString() {
-		return this.message+" = CHF "+win+" gewonnen!";
+		return this.message+" = CHF "+win;
 	}
 	
 	public int getWin() {

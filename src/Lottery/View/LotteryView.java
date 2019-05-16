@@ -2,9 +2,7 @@ package Lottery.View;
 
 import Lottery.Model.LotteryModel;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class LotteryView {
@@ -12,23 +10,23 @@ public class LotteryView {
 	private LotteryModel model;
 	private TipArea tipArea;
 	private DrawArea drawArea;
-	private EvaluateArea evaluateArea;
+	private MenuPane menu;
 	
 	public LotteryView(Stage stage, LotteryModel model) {
 		this.model = model;
 		
 		tipArea = new TipArea(model);
 		drawArea = new DrawArea(model);
-		evaluateArea = new EvaluateArea();
+		menu = new MenuPane();
 		
-		HBox root = new HBox();
-		root.setSpacing(10);
-		root.getChildren().addAll(tipArea, drawArea, evaluateArea);
+		BorderPane root = new BorderPane();
+		root.setLeft(tipArea);
+		root.setCenter(drawArea);
+		root.setTop(menu);
+		root.getStyleClass().add("root");
 		
-
 		stage.setResizable(true);
-		
-        // Create and display scene
+        //Create and display scene
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(
 				getClass().getResource("lottery.css").toExternalForm());
@@ -45,7 +43,7 @@ public class LotteryView {
 		return this.drawArea;
 	}
 	
-	public EvaluateArea getEvaluateArea() {
-		return this.evaluateArea;
+	public MenuPane getMenuPane() {
+		return this.menu;
 	}
 }
