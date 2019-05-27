@@ -1,7 +1,5 @@
 package Lottery.Model;
 
-import java.util.Random;
-
 import javafx.beans.property.SimpleStringProperty;
 
 public class RegularNumber implements Comparable<RegularNumber> {
@@ -9,10 +7,10 @@ public class RegularNumber implements Comparable<RegularNumber> {
 	private final static int MAX_VALUE = 42;
 	protected SimpleStringProperty asString = new SimpleStringProperty();
 	protected int value;
-	protected Random rand = new Random();
 	
-	public RegularNumber() {
-		this.value = rand.nextInt(MAX_VALUE)+1;
+	public RegularNumber(int value) {
+		if (value > 0 && value <= MAX_VALUE)
+			this.value = value;
 		asString.setValue(value+"");
 	}
 	

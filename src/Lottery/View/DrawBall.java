@@ -18,6 +18,7 @@ public class DrawBall extends StackPane {
 		this.getChildren().addAll(circle, numberTxt);
 		this.setLayoutX(30);
 		this.setLayoutY(30);
+		this.getStyleClass().add("drawBall");
 	}
 	
 	public void setText(String newText) {

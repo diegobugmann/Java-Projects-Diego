@@ -25,7 +25,8 @@ public class LotteryView {
 		root.setTop(menu);
 		root.getStyleClass().add("root");
 		
-		stage.setResizable(true);
+		stage.setResizable(false);
+		
         //Create and display scene
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(

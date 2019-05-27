@@ -4,10 +4,12 @@ public class LotteryModel {
 	
 	private TipList tipList;
 	private Combination drawing;
+	public static final int MAX_TIPS = 200;
 	public static int drawCount = 0;
 	public static double totalCosts = 0;
 	public static int tipCount = 0;
 	public static int totalWins = 0;
+	
 	
 	public LotteryModel() {
 		this.tipList = new TipList();

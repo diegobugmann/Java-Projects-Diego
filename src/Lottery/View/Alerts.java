@@ -6,6 +6,7 @@ import Lottery.Model.TipEvaluation;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
+//This class contains singleton methods for all Alerts used in this program
 public class Alerts {
 	
 	private static Alert hintsAlert;
@@ -39,7 +40,7 @@ public class Alerts {
 		if (clearAlert == null) createClearAlert();
 		return clearAlert;
 	}
-	
+
 	private static void createHintsAlert() {
 		hintsAlert = new Alert(AlertType.INFORMATION);
 		hintsAlert.setHeaderText("Tipp-Hinweise");
@@ -56,7 +57,7 @@ public class Alerts {
 		oddsAlert.setHeaderText("Gewinne und Wahrscheinlichkeiten");
 		oddsAlert.setContentText(
 				"Richtige Zahlen\t  Gewinn\t\t\t Wahrscheinlichkeit\n" + 
-				"\t 6+1\t\t	  Jackpot\t\t\t 1 : 31'474'716 \n" + 
+				"\t 6+1\t\t	  CHF 9'999'999.-\t 1 : 31'474'716 \n" + 
 				"\t 6\t\t	  CHF 1'000'000.-\t 1 : 6.294.943 \n" + 
 				"\t 5+1\t\t	  CHF 10'000.-\t\t 1 : 145.716 \n" + 
 				"\t 5\t\t	  CHF 1'000.-\t\t 1 : 29.143 \n" + 

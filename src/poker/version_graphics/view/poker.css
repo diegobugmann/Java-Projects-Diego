@@ -78,7 +78,7 @@
 }
 
 .root {
-	-fx-background-image: url("../../images/pokertable8.jpg");
+	-fx-background-image: url("../images/pokertable8.jpg");
 	-fx-background-size: cover;
 }
 
