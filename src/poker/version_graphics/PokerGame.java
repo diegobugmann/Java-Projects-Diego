@@ -16,7 +16,7 @@ public class PokerGame extends Application {
         launch();
     }
 
-    @Override
+	@Override
     public void start(Stage primaryStage) throws Exception {
     	// Create and initialize the MVC components
     	model = new PokerGameModel();
