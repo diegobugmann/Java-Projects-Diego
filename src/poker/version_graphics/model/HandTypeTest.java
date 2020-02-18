@@ -1,10 +1,10 @@
 package poker.version_graphics.model;
 
-import static org.junit.Assert.*;
-import java.util.ArrayList;
-
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
+import java.util.ArrayList;
 
 public class HandTypeTest {
 	// We define the hands using abbreviations. The code at the bottom
